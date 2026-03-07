@@ -8,8 +8,7 @@
 #
 # What it does:
 #   1. Symlinks .env from the main repo (or copies it with --copy-env)
-#   2. Configures Poetry to use an in-project .venv
-#   3. Runs poetry install to create a local virtualenv
+#   2. Runs poetry install to sync dependencies (uses Poetry's cached venv)
 #
 set -euo pipefail
 
@@ -56,23 +55,17 @@ else
     echo "[skipped]   .env (not found in main repo — copy .env.example and configure)"
 fi
 
-# --- Poetry virtualenv (in-project) ---
+# --- Poetry dependencies ---
 cd "$WORKTREE_PATH"
-
-# Configure Poetry to create .venv inside the worktree
-poetry config virtualenvs.in-project true --local 2>/dev/null || true
 
 echo ""
 echo "Installing dependencies with Poetry..."
 poetry install --no-interaction --quiet
-echo "[installed] Poetry dependencies (.venv created)"
+echo "[installed] Poetry dependencies"
 
 echo ""
 echo "=== Setup complete ==="
 echo ""
-echo "To activate the environment:"
 echo "  cd $WORKTREE_PATH"
-echo "  source .venv/bin/activate"
-echo ""
-echo "To start the dev server:"
+echo "  poetry shell"
 echo "  uvicorn main:app --reload --port 8000"
