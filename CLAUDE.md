@@ -130,6 +130,10 @@ feast-api/
 - Conventional commit messages: `feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`
 - Keep commits focused and atomic
 
+## Skills
+- For worktree management, use the `worktree` skill at `skills/worktree/SKILL.md` — do NOT use the built-in `EnterWorktree` tool
+- Project skills take priority over built-in tools when both match
+
 ## Domain Context
 Feast manages:
 - **Users**: Customers and restaurant owners/staff
