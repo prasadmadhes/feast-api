@@ -21,7 +21,7 @@ if [[ ! -d "$WORKTREE_PATH" ]]; then
     exit 1
 fi
 
-INIT_CMD="cd '$WORKTREE_PATH' && source \$(poetry env info --path)/bin/activate; echo '=== feast-api worktree: $NAME ==='"
+INIT_CMD="cd '$WORKTREE_PATH' && source .venv/bin/activate; echo '=== feast-api worktree: $NAME ==='"
 
 # Prefer iTerm2, fall back to Terminal.app
 if osascript -e 'tell application "System Events" to get name of every process' 2>/dev/null | grep -q "iTerm2"; then
